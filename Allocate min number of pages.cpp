@@ -15,35 +15,28 @@ Note: Return -1 if a valid assignment is not possible, and allotment should be i
 better understanding).
 
 Example 1:
-Input:
-N = 4
+Input: N = 4
 A[] = {12,34,67,90}
 M = 2
 Output: 113
-Explanation: 
-Allocation can be done in following ways:
+Explanation: Allocation can be done in following ways:
 {12} and {34, 67, 90} Maximum Pages = 191
 {12, 34} and {67, 90} Maximum Pages = 157
 {12, 34, 67} and {90}  Maximum Pages =113
-Therefore, the minimum of these cases is 
-113, which is selected as the output.
+Therefore, the minimum of these cases is 113, which is selected as the output.
 
 Example 2:
-Input:
-N = 3
+Input: N = 3
 A[] = {15,17,20}
 M = 2
 Output: 32
 Explanation: Allocation is done as {15,17} and {20}
 */
 
-
 //It is a special problem in which we use binary search even after the arr is not sorted
-
 class Solution {
 //Time Complexity: O(n * log (mx-k)) = O(n log n)
-// we divide the array into M parts and eyeing on resulatant array as res array is just max from
-// other arrays
+// we divide the array into M parts and eyeing on resulatant array as res array is just max from other arrays
     public:
     
     bool isFeasible(int arr[], int n, int m, int number){
@@ -89,12 +82,5 @@ class Solution {
     return ans;  
     }
 };
-
-
-
-
-
-
-
 
 
