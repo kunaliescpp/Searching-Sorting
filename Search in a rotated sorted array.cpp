@@ -65,8 +65,7 @@ public:
     }
 };
 
-//test cases fails for [1]
-//                      2
-
+// if(x >= nums[start] && x <= nums[mid-1]) 
+// this gives runtime error when arr contains only 1 element. i.e. arr = [1], x = 2               
 
 
