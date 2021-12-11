@@ -41,13 +41,15 @@ class Solution {
     
     bool isFeasible(int arr[], int n, int m, int number){
         
-        int cnt = 1, Sum = 0;                               // error : cnt == 0
+        int cnt = 1,                //error : cnt == 0
+        int sum = 0;                               
         for(int i = 0; i < n; i++){
             
-            if(Sum + arr[i] <= number){
-                Sum += arr[i];
+            if(sum + arr[i] <= number){
+                sum += arr[i];
             } else {
-                cnt++, Sum = arr[i];
+                cnt++;
+                sum = arr[i];
             }
             
             if(cnt > m) return false;
