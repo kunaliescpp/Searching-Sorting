@@ -18,59 +18,49 @@ Constraints:
 1 <= arr[i] <= 10^3
 */
 
+#include <iostream>
+using namespace std;
 
-class Solution{
-  // Time complexity : O(n logn), where log n is no. of levels of rec. calls i.e. log2n + 1
-   // Aux space : O(n)
+// Merge sort
+void merge(vector<int>& v, int si, int ei){
+    if(si >= ei) return;
     
-    public:
-    void merge(int arr[], int start, int mid, int end){
-        
-    // Time: O(n),  Aux space : O(n)
-    
-        //Setting up auxiliary arrays
-        int n1 = mid - start + 1; 
-        int n2 = end - mid;
-        int left[n1], right[n2];
-        
-        for(int i = 0; i < n1; i++) left[i] = arr[start + i];
-        for(int i = 0; i < n2; i++) right[i] = arr[mid + 1 + i];
-       
-       //Basic merge logic
-       int i = 0, j = 0, k = start;
-        while(i < n1 && j < n2){
-            if(left[i] <= right[j]){
-                arr[k] = left[i];
-                i++; k++;
-            } else {
-                arr[k] = right[j];
-                k++; j++;
-            }
-        }
-        
-        while(i < n1){
-           arr[k] = left[i];
-           k++; i++;
-        }
-        
-        while(j < n2){
-           arr[k] = right[j];
-           k++; j++;
-        }
+    int mid = (si + ei)/2;
+    merge(v, si, mid);
+    merge(v, mid+1, ei);
+
+    int i = si, j = mid+1;
+    vector<int> ans;
+    while(i <= mid && j <= ei){
+        if(v[i] > v[j]) ans.push_back(v[j++]);
+        else ans.push_back(v[i++]);
     }
     
-    void mergeSort(int arr[], int start, int end){
-        
-        if(start >= end) return;
-            
-        int mid = start + (end-start)/2;
-        mergeSort(arr, start, mid);
-        mergeSort(arr, mid + 1, end);
-      
-        merge(arr, start, mid , end);
+    while(i <= mid) ans.push_back(v[i++]);
+    while(j <= end) ans.push_back(v[j++]);
+    
+    for(int i = si; i <= ei; i++){
+        v[i] = ans[i-si];
     }
-};
+}
 
+int main() {
+	
+	int n;
+	cin >> n;
+	
+	vector<int> v(n);
+	for(int &i : v){
+	    cin >> i;
+	}
+	
+	merge(v, 0, n-1);
+	
+	for(int i = 0; i < n; i++){
+	    cout << v[i] << " ";
+	}
 
+return 0;
+}
 
 
