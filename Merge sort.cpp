@@ -18,7 +18,7 @@ Constraints:
 1 <= arr[i] <= 10^3
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Merge sort
