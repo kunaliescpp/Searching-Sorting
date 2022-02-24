@@ -48,14 +48,14 @@ Constraints:
 class Solution {
 public:
     
-    bool checker(vector<int>& weights, int maxi, int days){
+    bool checker(vector<int>& weights, int val, int days){
         int n = weights.size();
         int sum = 0;
         int cut = 0;
         for(int i = 0; i < n; i++){
-            if(weights[i] > maxi) return 0;
+            if(weights[i] > val) return 0;
             
-            if(sum + weights[i] > maxi){
+            if(sum + weights[i] > val){
                 cut++;
                 sum = weights[i];
             } else{
