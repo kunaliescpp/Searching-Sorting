@@ -22,10 +22,6 @@ Example 3:
 Input: nums = [21212,10101,12121], threshold = 1000000
 Output: 1
 
-Example 4:
-Input: nums = [2,3,5,7,11], threshold = 11
-Output: 3
- 
 
 Constraints:
 1 <= nums.length <= 5 * 10^4
@@ -33,40 +29,32 @@ Constraints:
 nums.length <= threshold <= 10^6
 */
     
-class Solution {
-public:
-        
-    bool isPossible(vector<int>& piles, int threshold, int div){  //is possible to finish the lunch with curr divisor
-        double Sum = 0;
-        for(int i = 0; i < piles.size(); i++){
-            Sum += ceil(piles[i]*1.0/div);
-        }
-    return Sum <= threshold;
+bool checker(vector<int>& nums, int threshold, int val){
+    int n = nums.size();
+
+    int sum = 0;
+    for(int i = 0; i < n; i++){
+        sum+= ceil(nums[i]*1.0/val);
     }
-    
-    int smallestDivisor(vector<int>& nums, int threshold) {
-         
-        int sum = 0; int maxi = INT_MIN;
-        for(int i : nums){
-            maxi = max(maxi , i);
+
+return (sum <= threshold);
+}
+
+int smallestDivisor(vector<int>& nums, int threshold) {
+
+    int ans = 0;
+    int l = 1, r = 1e9;
+    while(l <= r){
+        int mid = (l+r)/2;
+
+        if(checker(nums, threshold, mid) == 1){
+            ans = mid;
+            r = mid-1;
+        } else{
+            l = mid+1;
         }
-    
-        if(threshold == nums.size()) return maxi;
-        
-        int start = 0, end = maxi;
-        int divisor = INT_MAX;
-        while(start <= end){
-            
-            int mid = start + (end-start)/2;
-            if(isPossible(nums, threshold, mid) == true){    //same sum to divide the number but divisor is less (found on left half)
-                divisor = mid;
-                end = mid-1;                          // left me check kro, curr se or kam milegi 
-            } else {
-                start = mid+1;
-            }
-        }
-    return divisor;
     }
-};
+return ans;
+}
 
 
