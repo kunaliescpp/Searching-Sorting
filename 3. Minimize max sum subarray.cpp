@@ -27,15 +27,15 @@ Constraints:
 1 <= m <= min(50, nums.length)
 */
 
-bool checker(vector<int>& v, int maxi, int m){
+bool checker(vector<int>& v, int val, int m){
     int n = v.size();
 
     int sum = 0;
     int cut = 0;
     for(int i = 0; i < n; i++){
-        if(v[i] > maxi) return 0;
+        if(v[i] > val) return 0;
 
-        if(sum + v[i] > maxi){
+        if(sum + v[i] > val){
             cut++;
             sum = v[i];
         } else{
