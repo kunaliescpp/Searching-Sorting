@@ -20,10 +20,6 @@ Example 2:
 Input: piles = [30,11,23,4,20], h = 5
 Output: 30
 
-Example 3:
-Input: piles = [30,11,23,4,20], h = 6
-Output: 23
- 
 
 Constraints:
 1 <= piles.length <= 10^4
@@ -39,7 +35,6 @@ bool checker(vector<int>& piles, int val, int h){
         if(piles[i] <= val) cnt++;
         else cnt+= ceil(piles[i]*1.0/val);
     }
-
 return cnt<=h;
 }
 
@@ -58,7 +53,6 @@ int minEatingSpeed(vector<int>& piles, int h) {
             l = mid+1;
         }
     }
-
 return ans;
 }
 
