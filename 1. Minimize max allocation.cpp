@@ -33,13 +33,13 @@ Constraints:
 1 <= M <= 10^5
 */
 
-bool checker(int v[], int maxi, int n, int m){
+bool checker(int v[], int val, int n, int m){
     int sum = 0;
     int cut = 0;
     for(int i = 0; i < n; i++){
-        if(v[i] > maxi) return 0;
+        if(v[i] > val) return 0;
 
-        if(sum + v[i] > maxi){
+        if(sum + v[i] > val){
             cut++;
             sum = v[i];
         } else{
