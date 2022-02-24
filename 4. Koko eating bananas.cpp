@@ -31,41 +31,35 @@ piles.length <= h <= 10^9
 1 <= piles[i] <= 10^9
 */
 
-  
-class Solution {
-public:
-    bool isPossible(vector<int>& piles, int h, int sp){    // is possible to finish the lunch with given speed
-        double time = 0;
-        for(int i = 0; i < piles.size(); i++){
-            time += ceil(piles[i]*1.0/sp);
-        }
-    return time <= h;
+bool checker(vector<int>& piles, int val, int h){
+    int n = piles.size();
+
+    int cnt = 0;
+    for(int i = 0; i < n; i++){
+        if(piles[i] <= val) cnt++;
+        else cnt+= ceil(piles[i]*1.0/val);
     }
-    
-    //just ok speed of complete the lunch on time
-    int minEatingSpeed(vector<int>& piles, int h) {
-        
-        int sum = 0; int maxi = INT_MIN;
-        for(int i : piles){
-            maxi = max(maxi , i);
+
+return cnt<=h;
+}
+
+int minEatingSpeed(vector<int>& piles, int h) {
+    int n = piles.size();
+
+    int ans = 0;
+    int l = 1, r = 1e9;
+    while(l <= r){
+        int mid = (l+r)/2;
+
+        if(checker(piles, mid, h) == 1){
+            ans = mid;
+            r = mid-1;
+        } else{
+            l = mid+1;
         }
-    
-        if(h == piles.size()) return maxi;
-        
-        int start = 0, end = maxi;
-        int speed = INT_MAX;
-        while(start <= end){
-            
-            int mid = start + (end-start)/2;
-            if(isPossible(piles, h, mid) == true){    //same time taken to eat the lunch but speed is less (found on left half)
-                speed = mid;
-                end = mid-1;                          // left me check kro, curr se or kam milegi 
-            } else {
-                start = mid+1;
-            }
-        }
-    return speed;
     }
-};
+
+return ans;
+}
 
 
