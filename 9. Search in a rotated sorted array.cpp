@@ -32,7 +32,7 @@ nums is an ascending array that is possibly rotated.
 -10^4 <= target <= 10^4
 */
 
-// can be (not must be) minimize or maximize 
+// can be (not either) minimize or maximize 
 int search(vector<int>& nums, int target) {
     int n = nums.size();
 
@@ -47,18 +47,17 @@ int search(vector<int>& nums, int target) {
         } 
 
         // if left portion sorted, then ask direction
-        else if(nums[l] < nums[mid]){
+        else if(nums[l] <= nums[mid-1]){
             if(target >= nums[l] && target <= nums[mid-1]) r = mid-1;
             else l = mid+1;
         } 
 
         // if right portion sorted, then ask direction
-        else if(nums[mid] < nums[r]){
+        else if(nums[mid+1] <= nums[r]){
             if(target >= nums[mid+1] && target <= nums[r]) l = mid+1;
             else r = mid-1;
         }      
     }
-
 return -1;
 }
 
