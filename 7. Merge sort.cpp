@@ -45,13 +45,13 @@ void merge(vector<int>& v, int si, int ei){
 
 int main() {
 	
-	int n; cin >> n;
+    int n; cin >> n;
 
-	vector<int> v(n);
-	for(int &i : v) cin >> i;
-  
-	merge(v, 0, n-1);
-	for(int &i: v) cout << v[i] << " ";
+    vector<int> v(n);
+    for(int &i : v) cin >> i;
+
+    merge(v, 0, n-1);
+    for(int &i: v) cout << v[i] << " ";
 	
 return 0;
 }
