@@ -13,78 +13,54 @@ Example 1:
 Input: N = 5, arr[] = {2, 4, 1, 3, 5}
 Output: 3
 Explanation: The sequence 2, 4, 1, 3, 5 has three inversions (2, 1), (4, 1), (4, 3).
-
-Example 2:
-Input: N = 5
-arr[] = {2, 3, 4, 5, 6}
-Output: 0
-Explanation: As the sequence is already sorted so there is no inversion count.
-
-Example 3:
-Input: N = 3, arr[] = {10, 10, 10}
-Output: 0
-Explanation: As all the elements of array are same, so there is no inversion count.
-
-
-Constraints:
-1 ≤ N ≤ 5*10^5
-1 ≤ arr[i] ≤ 10^18
 */
     
-long long countandMerge(long long arr[], int start, int mid, int end){
-// Time: O(n),  Aux space : O(n)
+//author: kunaliescpp
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long int
+#define mod 1000000007
 
-    //Setting up auxiliary arrays
-    long long n1 = mid - start + 1; 
-    long long n2 = end - mid;
-    long long left[n1], right[n2];
+int solver(vector<int>& v, int l, int r){
     
-    for(long long i = 0; i < n1; i++) left[i] = arr[start + i];
-    for(long long i = 0; i < n2; i++) right[i] = arr[mid + 1 + i];
-   
-   //Basic merge logic
-   long long res = 0;
-   long long  i = 0, j = 0, k = start;
-    while(i < n1 && j < n2){
-        if(left[i] <= right[j]){
-            arr[k] = left[i];
-            i++; k++;
-        } else {
-            arr[k] = right[j];
-            res = res + (n1-i);            //left arr me curr pointer (i)->end tak no. of elements
-            k++; j++;
-        }
-    }
-    
-    while(i < n1){
-       arr[k] = left[i];
-       k++; i++;
-    }
-    
-    while(j < n2){
-       arr[k] = right[j];
-       k++; j++;
-    }
-return res;
-}
-   
-long long int invCount(long long arr[], long long start, long long end){
-    
-    long long res = 0;
-    if(start >= end) return 0;
-        
-    int mid = start + (end-start)/2;
-    
-    res += invCount(arr, start, mid);
-    res += invCount(arr, mid + 1, end);
-    res += countandMerge(arr, start, mid , end);
+    if(l >= r) return 0;
 
-return res;
+    int mid = (l+r)/2;
+    int left_cnt = solver(v, l, mid);
+    int right_cnt = solver(v, mid+1, r);
+    
+    vector<int> store;
+    int i = l, j = mid+1;
+    int cnt = 0;
+    while(i <= mid && j <= r){
+        if(v[i] <= v[j]){
+            store.push_back(v[i++]);
+        } else{
+            store.push_back(v[j++]);
+            cnt+= (mid-i+1);
+        } 
+    }
+    
+    while(i <= mid) store.push_back(v[i++]);
+    while(j <= r) store.push_back(v[j++]);
+    
+    for(int ci = 0; ci < store.size(); ci++){
+        v[ci+l] = store[ci];
+    }
+return (left_cnt + right_cnt + cnt);
 }
 
-long long int inversionCount(long long arr[], long long n){
-    // start and end is not given in input, so we need another function
-    invCount(arr, 0, n-1);
+int32_t main() {
+
+    int n; cin >> n;
+      
+    vector<int>v(n);
+    for(int &i: v) cin >> i;
+    
+    int cnt = solver(v, 0, n-1);
+    cout << "Inversion count: " << cnt << endl;
+    for(int &i: v) cout << i << " ";
+  return 0;
 }
 
 
