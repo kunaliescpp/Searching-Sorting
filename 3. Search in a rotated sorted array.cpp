@@ -32,7 +32,7 @@ nums is an ascending array that is possibly rotated.
 -10^4 <= target <= 10^4
 */
 
-// can be (not either) minimize or maximize 
+// can be (not either) minimize or maximize idx
 int search(vector<int>& nums, int target) {
     int n = nums.size();
 
