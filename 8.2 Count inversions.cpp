@@ -12,7 +12,11 @@ Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
 Example 1:
 Input: N = 5, arr[] = {2, 4, 1, 3, 5}
 Output: 3
-Explanation: The sequence 2, 4, 1, 3, 5 has three inversions (2, 1), (4, 1), (4, 3).
+Explanation: The sequence 2, 4, 1, 3, 5 has three inversions: (2, 1), (4, 1), (4, 3).
+
+Input: N = 4, arr[] = {8, 4, 2, 1}
+Output: 6
+Explanation: Given array has six inversions: (8, 4), (4, 2), (8, 2), (8, 1), (4, 1), (2, 1)
 */
     
 //author: kunaliescpp
