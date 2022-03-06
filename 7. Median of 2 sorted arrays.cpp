@@ -11,11 +11,6 @@ Input: nums1 = [1,3], nums2 = [2]
 Output: 2.00000
 Explanation: merged array = [1,2,3] and median is 2.
 
-Example 2:
-Input: nums1 = [1,2], nums2 = [3,4]
-Output: 2.50000
-Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
-
 
 Constraints:
 nums1.length == m
@@ -26,6 +21,7 @@ nums2.length == n
 -10^6 <= nums1[i], nums2[i] <= 10^6
 */
 
+// TC: O(log min(n, m))
 double findMedianSortedArrays(vector<int>& v1, vector<int>& v2) {
   int m = v1.size(), n = v2.size();
   if(n < m) return findMedianSortedArrays(v2, v1);
