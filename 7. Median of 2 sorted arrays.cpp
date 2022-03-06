@@ -26,41 +26,29 @@ nums2.length == n
 -10^6 <= nums1[i], nums2[i] <= 10^6
 */
 
-class Solution {
-public:
-   // Median : Middle value's mean (two middle values or one middle value)
-   // Approach :we assume that nums1.size() < nums2.size(). If our assumption is not true then we changepointers.1
-   // Time complexity: O(log n1)
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        
-        int n1 = nums1.size(), n2 = nums2.size();
-        if(n2 < n1) return findMedianSortedArrays(nums2,nums1);
-        
-        int start1 = 0, end1 = n1;
-        while(start1 <= end1){
-            // left half of nums1 + left half of nums2 = right half of nums1 + right half of nums2
-            int i1 = (start1 + end1)/ 2;
-            int i2 = (n2 + n1 + 1)/2 - i1;
-            
-            //maxi pointer is at  i-1 & mini pointer is at i
-            int mini1 = (i1 == n1) ? INT_MAX : nums1[i1]; 
-            int maxi1 = (i1 == 0) ? INT_MIN : nums1[i1 - 1]; 
-            
-            int mini2 = (i2 == n2) ? INT_MAX : nums2[i2]; 
-            int maxi2 = (i2 == 0) ? INT_MIN : nums2[i2 - 1]; 
-            
-            //Iteration
-            if(mini1 >= maxi2 && mini2 >= maxi1){
-                if((n1 + n2) % 2 == 0) return ((double) max(maxi1, maxi2) +  min(mini1, mini2))/2;
-                else return ((double) max(maxi1, maxi2));
-            }
-            
-           else if (mini1 < maxi2) start1 = i1 + 1;          // Aage khiska lo mini 1 ki jyada value chahiye
-           else end1 = i1 - 1;                                      // piche le aao maxi 1 jyada aa rha he
-        }
-    
-    return 0.0;
-    }
-};
+double findMedianSortedArrays(vector<int>& v1, vector<int>& v2) {
+  int m = v1.size(), n = v2.size();
+  if(n < m) return findMedianSortedArrays(v2, v1);
+
+  int l = 0, r = m;
+  while(l <= r){
+      int cut1 = (l+r)/2;
+      int cut2 = (m+n+1)/2 - cut1;   //(m+n)/2 - cut1
+
+      int left1 = (cut1 == 0) ? -1e9 : v1[cut1-1]; 
+      int right1 = (cut1 == m) ? 1e9 : v1[cut1]; 
+
+      int left2 = (cut2 == 0) ? -1e9 : v2[cut2-1]; 
+      int right2 = (cut2 == n) ? 1e9 : v2[cut2]; 
+
+      if(left1 <= right2 && left2 <= right1){
+          if((m+n)%2 == 0) return (max(left1, left2)+ min(right1, right2))/2.0;
+          else return max(left1, left2);
+      }
+     else if (left1 > right2) r = cut1-1;      
+     else l = cut1+1;                                     
+  }
+return 0.0;
+}
 
 
