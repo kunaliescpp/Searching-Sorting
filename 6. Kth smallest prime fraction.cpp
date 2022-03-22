@@ -62,7 +62,6 @@ vector<int> kthSmallestPrimeFraction(vector<int>& v, int k) {
         else if (ans[0] > k) r = mid;
         else return {ans[1], ans[2]};                           // return {p, q}
     }
-
 return {};
 }
 
