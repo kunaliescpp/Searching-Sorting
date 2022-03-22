@@ -25,39 +25,17 @@ Constraints:
 1 ≤ Arri ≤ 10^9
 */
 
-class Solution{
-public:
+int minRemoval(int arr[], int n){
 
-    int first_Greatest(int arr[], int si, int ei, int target){
-      
-        while(si <= ei) {
-            int mid = (si+ei)/2;
-          
-            if (arr[mid] <= target){
-                si = mid + 1;
-            }
-            
-            else if (arr[mid] > target){
-                ei = mid - 1;
-            }
-        }
-        // cout<< ei + 1 << "";
-    return ei + 1;
-    }
-   
-    // 2*min element >= max element
-	int minRemoval(int arr[], int n){
-	    
-	   int res = INT_MAX;
-	   sort(arr, arr+n);
-	   for(int i = 0; i < n; i++){
-	       int removals = first_Greatest(arr, i+1, n-1, 2*arr[i]);
-	       //int x = i+n-removals;
-	       //cout << x;
-	       res = min(res, n-removals+i);
-	   }
-	return res;
-	}
-};
+   sort(arr, arr+n);
+
+   int ans = 1e9;
+   for(int i = 0; i < n; i++){
+    auto it = upper_bound(arr, arr+n, 2*arr[i]);
+    int j = it-1-arr;
+    ans = min(ans, (i)+(n-1-j));
+   }
+return ans;
+}
 
 
