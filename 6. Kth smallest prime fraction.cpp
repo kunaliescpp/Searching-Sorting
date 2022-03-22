@@ -54,7 +54,7 @@ vector<int> kthSmallestPrimeFraction(vector<int>& v, int k) {
     int n = v.size();
 
     double l = 0, r = 1.0;
-    while (l < r){
+    while (l <= r){
         double mid = (l+r)/2;
 
         vector<int>ans = getFractionsLessThanMid(v, mid);
