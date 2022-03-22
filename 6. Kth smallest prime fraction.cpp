@@ -30,38 +30,48 @@ All the numbers of arr are unique and sorted in strictly increasing order.
 1 <= k <= arr.length * (arr.length - 1) / 2
 */
 
-vector<int> getFractionsLessThanMid (vector<int>& v, double mid){
+int getFractionsLessThanMid (vector<int>& v, double mid, int& max_p, int& max_q, int k){
     int n = v.size();
 
     int cnt = 0;
-    int j = 1, temp = n-1;
+    int j = 1, e = n-1;
     int p = 0, q = 1;
     for(int i = 0; i <= n-2; i++){
-        while(j < n && v[i] > mid * v[j]){          // arr[i]/arr[j] <= mid
-            j++; temp--;
-        }
-        cnt += temp;
 
-        if(j < n && (p*v[j] < q*v[i])){        // p/q < arr[i]/arr[j] -> (near mid = update)
+        while(j < n){ 
+            if(v[i] <= mid*v[j]) break;
+            j++; e--;
+        }
+        cnt+= e;
+
+        if(j < n && (p*v[j] < q*v[i])){        
             p = v[i];
             q = v[j];
         }
     }
-return {cnt, p, q};
+
+    if(cnt == k){
+        max_p = p;
+        max_q = q;
+    }
+
+return cnt;
 }
 
 vector<int> kthSmallestPrimeFraction(vector<int>& v, int k) {
     int n = v.size();
 
+    int max_p = 0, max_q = 1;
     double l = 0, r = 1.0;
-    while (l <= r){
+    while (l < r){
         double mid = (l+r)/2;
 
-        vector<int>ans = getFractionsLessThanMid(v, mid);
-        if(ans[0] < k) l = mid;
-        else if (ans[0] > k) r = mid;
-        else return {ans[1], ans[2]};                           // return {p, q}
+        int cnt = getFractionsLessThanMid(v, mid, max_p, max_q, k);
+        if(cnt < k) l = mid;
+        else if (cnt > k) r = mid;
+        else return {max_p, max_q};                         
     }
+
 return {};
 }
 
