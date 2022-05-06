@@ -33,7 +33,7 @@ bool checker(vector<int>& piles, int val, int h){
     int cnt = 0;
     for(int i = 0; i < n; i++){
         if(piles[i] <= val) cnt++;
-        else cnt+= ceil(piles[i]*1.0/val);
+        else cnt+= ceil((double)piles[i]/val);
     }
 return cnt<=h;
 }
