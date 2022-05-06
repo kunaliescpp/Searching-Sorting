@@ -34,7 +34,7 @@ bool checker(vector<int>& nums, int threshold, int val){
 
     int sum = 0;
     for(int i = 0; i < n; i++){
-        sum+= ceil(nums[i]*1.0/val);
+        sum+= ceil((double)nums[i]/val);
     }
 
 return (sum <= threshold);
